@@ -1,0 +1,17 @@
+<ion-view >
+    <ion-content >
+      <div btf-markdown="mdContent">
+      </div>
+      <br><br><br><br>
+      <ion-list>
+        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="comment in comments">
+          <img ng-src="{{comment.user.avatar_url}}">
+          <h2>
+            <div btf-markdown="comment.body">
+            </div>
+          </h2>
+          <p>{{comment.user.login}}</p>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+</ion-view>

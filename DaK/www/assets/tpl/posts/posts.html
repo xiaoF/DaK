@@ -1,5 +1,16 @@
 <ion-view >
     <ion-content >
-        posts.html
+      <ion-list>
+        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="post in posts" type="item-text-wrap" ng-click="loadPost(post.body,post.comments_url)">
+        <img ng-src="{{post.user.avatar_url}}">
+        <h2>{{post.title}}</h2>
+        <p>{{post.user.login}}</p>
+        <p>{{post.created_at}}</p>
+        </ion-item>
+        <ion-infinite-scroll
+          on-infinite="loadMore()"
+          distance="1%">
+        </ion-infinite-scroll>
+      </ion-list>
     </ion-content>
 </ion-view>

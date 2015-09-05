@@ -30,5 +30,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "assets/tpl/dak/dak.html",
             controller:'dakCtrl'
         })
+        .state('post', {
+          params: {content:null,commentData:null},
+          url: '/post',
+          templateUrl: "assets/tpl/posts/post.html",
+          controller:'postCtrl'
+        })
     $urlRouterProvider.otherwise('/posts');
 });

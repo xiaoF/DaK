@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('dak', ['ionic'])
+var app = angular.module('dak', ['ionic','btford.markdown'])
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -19,6 +19,7 @@ app.run(function($ionicPlatform) {
 })
 //decorator
 app.constant("GLOBAL_CONSTANT", {
+  //https://www.v2ex.com/api/topics/show.json?node_name=all4all
   //GITHUBAPIHOST:"https://api.github.com/repos/",
   //https://api.github.com/repos/lifesinger/lifesinger.github.com/issues
   //https://api.github.com/lifesinger/lifesinger.github.com/issues?callback=angular.callbacks._0
