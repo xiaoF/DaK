@@ -21,6 +21,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller:'postsCtrl'
         })
         .state('v2ex', {
+            params: {nodeURL:null},
             url: '/v2ex',
             templateUrl: "assets/tpl/v2ex/v2ex.html",
             controller:'v2exCtrl'
@@ -36,5 +37,5 @@ app.config(function ($stateProvider, $urlRouterProvider) {
           templateUrl: "assets/tpl/posts/post.html",
           controller:'postCtrl'
         })
-    $urlRouterProvider.otherwise('/posts');
+    $urlRouterProvider.otherwise('/v2ex');
 });

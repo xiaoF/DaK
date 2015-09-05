@@ -45,5 +45,32 @@ app.constant("GLOBAL_CONSTANT", {
   },{
     NAME:"xufei",
     REPO:"blog"
-  }]
+  }],
+  V2EXAPIHOST:"https://www.v2ex.com/api/",
+  NODES: [{
+    NAME:"最热",
+    URL:"topics/hot.json"
+  },{
+    NAME:"最新",
+    URL:"topics/hot.json"
+  },{
+    NAME:"深圳",
+    URL:"topics/show.json?node_name=shenzhen"
+  },{
+    NAME:"交易",
+    URL:"topics/show.json?node_name=all4all"
+  },{
+    NAME:"酷工作",
+    URL:"topics/show.json?node_name=jobs"
+  },{
+    NAME:"奇思妙想",
+    URL:"topics/show.json?node_name=ideas"
+  },{
+    NAME:"技术",
+    URL:"topics/show.json?node_name=tech"
+  },{
+    NAME:"问与答",
+    URL:"topics/show.json?node_name=qna"
+  }
+  ]
 })
