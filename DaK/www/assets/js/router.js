@@ -20,11 +20,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "assets/tpl/posts/posts.html",
             controller:'postsCtrl'
         })
-        .state('v2ex', {
+        .state('location', {
             params: {nodeURL:null},
-            url: '/v2ex',
-            templateUrl: "assets/tpl/v2ex/v2ex.html",
-            controller:'v2exCtrl'
+            url: '/location',
+            templateUrl: "assets/tpl/location/location.html",
+            controller:'locationCtrl'
         })
         .state('dak', {
             url: '/dak',
@@ -37,5 +37,5 @@ app.config(function ($stateProvider, $urlRouterProvider) {
           templateUrl: "assets/tpl/posts/post.html",
           controller:'postCtrl'
         })
-    $urlRouterProvider.otherwise('/v2ex');
+    $urlRouterProvider.otherwise('/location');
 });
