@@ -637,7 +637,7 @@ exports.defineAutoTests = function () {
 
                     // This is an undocumented interface to File which exists only for testing
                     // backwards compatibilty. By obtaining the raw filesystem path of the download
-                    // location, we can pass that to transfer.download() to make sure that previously-stored
+                    // draw, we can pass that to transfer.download() to make sure that previously-stored
                     // paths are still valid.
                     cordova.exec(function (localPath) {
                         transfer.download(fileURL, localPath, downloadWin, unexpectedCallbacks.httpFail);
@@ -886,7 +886,7 @@ exports.defineAutoTests = function () {
 
                     // This is an undocumented interface to File which exists only for testing
                     // backwards compatibilty. By obtaining the raw filesystem path of the download
-                    // location, we can pass that to transfer.download() to make sure that previously-stored
+                    // draw, we can pass that to transfer.download() to make sure that previously-stored
                     // paths are still valid.
                     cordova.exec(function (localPath) {
                         transfer.upload(localPath, fileURL, uploadWin, unexpectedCallbacks.httpFail, uploadOptions);

@@ -123,7 +123,7 @@ FileWriter.prototype.write = function(data) {
         // create a plain array, using the keys from the Uint8Array view so that we can serialize it
         data = Array.apply(null, new Uint8Array(data));
     }
-    
+
     // Throw an exception if we are already writing a file
     if (this.readyState === FileWriter.WRITING) {
         throw new FileError(FileError.INVALID_STATE_ERR);
@@ -193,13 +193,13 @@ FileWriter.prototype.write = function(data) {
 };
 
 /**
- * Moves the file pointer to the location specified.
+ * Moves the file pointer to the draw specified.
  *
  * If the offset is a negative number the position of the file
  * pointer is rewound.  If the offset is greater than the file
  * size the position is set to the end of the file.
  *
- * @param offset is the location to move the file pointer to.
+ * @param offset is the draw to move the file pointer to.
  */
 FileWriter.prototype.seek = function(offset) {
     // Throw an exception if we are already writing a file

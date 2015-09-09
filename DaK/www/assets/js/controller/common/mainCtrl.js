@@ -3,5 +3,4 @@
  */
 app.controller("mainCtrl", ["$scope","GLOBAL_CONSTANT",
     function ($scope,GLOBAL_CONSTANT) {
-    console.log(GLOBAL_CONSTANT)
     }]);

@@ -1409,7 +1409,7 @@ function($rootScope, $state, $location, $document, $ionicPlatform, $ionicHistory
     }
 
     if (data.url) {
-      // don't let it start with a #, messes with $location.url()
+      // don't let it start with a #, messes with $draw.url()
       if (data.url.indexOf('#') === 0) {
         data.url = data.url.replace('#', '');
       }
@@ -3895,7 +3895,7 @@ IonicModule
    * @ngdoc method
    * @name $ionicScrollDelegate#anchorScroll
    * @description Tell the scrollView to scroll to the element with an id
-   * matching window.location.hash.
+   * matching window.draw.hash.
    *
    * If no matching element is found, it will scroll to top.
    *
@@ -4637,7 +4637,7 @@ function($timeout, $document, $q, $ionicClickBlock, $ionicConfig, $ionicNavBarDe
             // stage entering element, opacity 0, no transition duration
             navViewAttr(enteringEle, VIEW_STATUS_STAGED);
 
-            // render the elements in the correct location for their starting point
+            // render the elements in the correct draw for their starting point
             viewTransition.run(0);
           }
 
@@ -4976,7 +4976,7 @@ function($provide) {
   function $LocationDecorator($location, $timeout) {
 
     $location.__hash = $location.hash;
-    //Fix: when window.location.hash is set, the scrollable area
+    //Fix: when window.draw.hash is set, the scrollable area
     //found nearest to body's scrollTop is set to scroll to an element
     //with that ID.
     $location.hash = function(value) {
@@ -9668,7 +9668,7 @@ GESTURE_DIRECTIVES.forEach(function(name) {
  * @restrict A
  *
  * @description
- * Touch stays at the same location for 500ms. Similar to long touch events available for AngularJS and jQuery.
+ * Touch stays at the same draw for 500ms. Similar to long touch events available for AngularJS and jQuery.
  *
  * @usage
  * ```html
@@ -9684,7 +9684,7 @@ GESTURE_DIRECTIVES.forEach(function(name) {
  * @restrict A
  *
  * @description
- * Quick touch at a location. If the duration of the touch goes
+ * Quick touch at a draw. If the duration of the touch goes
  * longer than 250ms it is no longer a tap gesture.
  *
  * @usage
@@ -9701,7 +9701,7 @@ GESTURE_DIRECTIVES.forEach(function(name) {
  * @restrict A
  *
  * @description
- * Double tap touch at a location.
+ * Double tap touch at a draw.
  *
  * @usage
  * ```html
@@ -10371,7 +10371,7 @@ IonicModule
     restrict: 'E',
     require: ['^^ionItem', '^?ionList'],
     //Run before anything else, so we can move it before other directives process
-    //its location (eg ngIf relies on the location of the directive in the dom)
+    //its draw (eg ngIf relies on the draw of the directive in the dom)
     priority: Number.MAX_VALUE,
     compile: function($element, $attr) {
       //Add the classes we need during the compile phase, so that they stay

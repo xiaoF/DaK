@@ -1,0 +1,24 @@
+<ion-side-menus>
+  <!-- Left menu -->
+  <ion-side-menu side="left">
+    22
+  </ion-side-menu>
+
+  <ion-side-menu-content>
+    <ion-view >
+      <ion-content >
+      <button ng-click="emitU()">aaaaa</button>
+      </ion-content>
+    </ion-view>
+  </ion-side-menu-content>
+
+  <!-- Right menu -->
+  <ion-side-menu side="right">
+    <ion-list>
+      <ion-item class="item-remove-animate" ng-repeat="menu in menuList" type="item-text-wrap">
+        <h2>{{menu.NAME}}</h2>
+        </ion-item>
+    </ion-list>
+  </ion-side-menu>
+
+</ion-side-menus>

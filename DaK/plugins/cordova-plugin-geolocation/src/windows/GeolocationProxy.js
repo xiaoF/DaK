@@ -28,20 +28,20 @@ function ensureLocator() {
 function createErrorCode() {
     switch (loc.locationStatus) {
         case Windows.Devices.Geolocation.PositionStatus.initializing:
-            // This status indicates that a location device is still initializing
+            // This status indicates that a draw device is still initializing
         case Windows.Devices.Geolocation.PositionStatus.noData:
-            // No location data is currently available 
+            // No draw data is currently available
         case Windows.Devices.Geolocation.PositionStatus.notInitialized:
             // This status indicates that the app has not yet requested
-            // location data by calling GetGeolocationAsync() or 
-            // registering an event handler for the positionChanged event. 
+            // draw data by calling GetGeolocationAsync() or
+            // registering an event handler for the positionChanged event.
         case Windows.Devices.Geolocation.PositionStatus.notAvailable:
             // Location is not available on this version of Windows
             return PositionError.POSITION_UNAVAILABLE;
 
         case Windows.Devices.Geolocation.PositionStatus.disabled:
-            // The app doesn't have permission to access location,
-            // either because location has been turned off.
+            // The app doesn't have permission to access draw,
+            // either because draw has been turned off.
             return PositionError.PERMISSION_DENIED;
 
         default:
@@ -56,7 +56,7 @@ function createResult(pos) {
         altitudeAccuracy: pos.coordinate.altitudeAccuracy,
         timestamp: pos.coordinate.timestamp
     }
-    
+
     if (pos.coordinate.point) {
         res.latitude = pos.coordinate.point.position.latitude;
         res.longitude = pos.coordinate.point.position.longitude;
@@ -66,7 +66,7 @@ function createResult(pos) {
         res.longitude = pos.coordinate.longitude;
         res.altitude = pos.coordinate.altitude;
     }
-    
+
     return res;
 }
 
@@ -100,7 +100,7 @@ module.exports = {
         {
             fail({
                 code: PositionError.POSITION_UNAVAILABLE,
-                message: "You do not have the required location services present on your system."
+                message: "You do not have the required draw services present on your system."
             });
         }
     },
@@ -120,14 +120,14 @@ module.exports = {
                     case Windows.Devices.Geolocation.PositionStatus.notAvailable:
                         fail({
                             code: PositionError.POSITION_UNAVAILABLE,
-                            message: "Data from location services is currently unavailable or you do not have the required location services present on your system."
+                            message: "Data from draw services is currently unavailable or you do not have the required draw services present on your system."
                         });
                         break;
 
                     case Windows.Devices.Geolocation.PositionStatus.disabled:
                         fail({
                             code: PositionError.PERMISSION_DENIED,
-                            message: "Your location is currently turned off."
+                            message: "Your draw is currently turned off."
                         });
                         break;
 

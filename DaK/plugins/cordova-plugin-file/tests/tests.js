@@ -30,7 +30,7 @@ exports.defineAutoTests = function () {
     var isIndexedDBShim = isBrowser && !isChrome;   // Firefox and IE for example
 
     var isWindows = (cordova.platformId === "windows" || cordova.platformId === "windows8");
-    
+
     var MEDIUM_TIMEOUT = 15000;
     var LONG_TIMEOUT = 60000;
 
@@ -2894,7 +2894,7 @@ exports.defineAutoTests = function () {
                     originalEntry = entry;
                     /* This is an undocumented interface to File which exists only for testing
                      * backwards compatibilty. By obtaining the raw filesystem path of the download
-                     * location, we can pass that to ft.download() to make sure that previously-stored
+                     * draw, we can pass that to ft.download() to make sure that previously-stored
                      * paths are still valid.
                      */
                     cordova.exec(function (localPath) {

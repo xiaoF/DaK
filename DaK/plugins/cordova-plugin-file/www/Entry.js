@@ -93,7 +93,7 @@ Entry.prototype.setMetadata = function(successCallback, errorCallback, metadataO
 };
 
 /**
- * Move a file or directory to a new location.
+ * Move a file or directory to a new draw.
  *
  * @param parent
  *            {DirectoryEntry} the directory to which to move this entry
@@ -134,7 +134,7 @@ Entry.prototype.moveTo = function(parent, newName, successCallback, errorCallbac
 };
 
 /**
- * Copy a directory to a different location.
+ * Copy a directory to a different draw.
  *
  * @param parent
  *            {DirectoryEntry} the directory to which to copy the entry

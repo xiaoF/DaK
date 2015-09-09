@@ -4480,7 +4480,7 @@ createInjector.$$annotate = annotate;
  *
  * @description
  * Use `$anchorScrollProvider` to disable automatic scrolling whenever
- * {@link ng.$location#hash $location.hash()} changes.
+ * {@link ng.$location#hash $draw.hash()} changes.
  */
 function $AnchorScrollProvider() {
 
@@ -4492,7 +4492,7 @@ function $AnchorScrollProvider() {
    *
    * @description
    * By default, {@link ng.$anchorScroll $anchorScroll()} will automatically detect changes to
-   * {@link ng.$location#hash $location.hash()} and scroll to the element matching the new hash.<br />
+   * {@link ng.$location#hash $draw.hash()} and scroll to the element matching the new hash.<br />
    * Use this method to disable automatic scrolling.
    *
    * If automatic scrolling is disabled, one must explicitly call
@@ -4513,11 +4513,11 @@ function $AnchorScrollProvider() {
    *
    * @description
    * When called, it scrolls to the element related to the specified `hash` or (if omitted) to the
-   * current value of {@link ng.$location#hash $location.hash()}, according to the rules specified
+   * current value of {@link ng.$location#hash $draw.hash()}, according to the rules specified
    * in the
    * [HTML5 spec](http://dev.w3.org/html5/spec/Overview.html#the-indicated-part-of-the-document).
    *
-   * It also watches the {@link ng.$location#hash $location.hash()} and automatically scrolls to
+   * It also watches the {@link ng.$location#hash $draw.hash()} and automatically scrolls to
    * match any anchor whenever it changes. This can be disabled by calling
    * {@link ng.$anchorScrollProvider#disableAutoScrolling $anchorScrollProvider.disableAutoScrolling()}.
    *
@@ -4525,7 +4525,7 @@ function $AnchorScrollProvider() {
    * vertical scroll-offset (either fixed or dynamic).
    *
    * @param {string=} hash The hash specifying the element to scroll to. If omitted, the value of
-   *                       {@link ng.$location#hash $location.hash()} will be used.
+   *                       {@link ng.$location#hash $draw.hash()} will be used.
    *
    * @property {(number|function|jqLite)} yOffset
    * If set, specifies a vertical scroll-offset. This is often useful when there are fixed
@@ -4557,12 +4557,12 @@ function $AnchorScrollProvider() {
        </file>
        <file name="script.js">
          angular.module('anchorScrollExample', [])
-           .controller('ScrollController', ['$scope', '$location', '$anchorScroll',
-             function ($scope, $location, $anchorScroll) {
+           .controller('ScrollController', ['$scope', '$draw', '$anchorScroll',
+             function ($scope, $draw, $anchorScroll) {
                $scope.gotoBottom = function() {
-                 // set the location.hash to the id of
+                 // set the draw.hash to the id of
                  // the element you wish to scroll to.
-                 $location.hash('bottom');
+                 $draw.hash('bottom');
 
                  // call $anchorScroll()
                  $anchorScroll();
@@ -4603,17 +4603,17 @@ function $AnchorScrollProvider() {
            .run(['$anchorScroll', function($anchorScroll) {
              $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
            }])
-           .controller('headerCtrl', ['$anchorScroll', '$location', '$scope',
-             function ($anchorScroll, $location, $scope) {
+           .controller('headerCtrl', ['$anchorScroll', '$draw', '$scope',
+             function ($anchorScroll, $draw, $scope) {
                $scope.gotoAnchor = function(x) {
                  var newHash = 'anchor' + x;
-                 if ($location.hash() !== newHash) {
-                   // set the $location.hash to `newHash` and
+                 if ($draw.hash() !== newHash) {
+                   // set the $draw.hash to `newHash` and
                    // $anchorScroll will automatically scroll to it
-                   $location.hash('anchor' + x);
+                   $draw.hash('anchor' + x);
                  } else {
                    // call $anchorScroll() explicitly,
-                   // since $location.hash hasn't changed
+                   // since $draw.hash hasn't changed
                    $anchorScroll();
                  }
                };
@@ -4728,11 +4728,11 @@ function $AnchorScrollProvider() {
     }
 
     // does not scroll when user clicks on anchor link that is currently on
-    // (no url change, no $location.hash() change), browser native does scroll
+    // (no url change, no $draw.hash() change), browser native does scroll
     if (autoScrollingEnabled) {
       $rootScope.$watch(function autoScrollWatch() {return $location.hash();},
         function autoScrollWatchAction(newVal, oldVal) {
-          // skip the initial scroll if $location.hash is empty
+          // skip the initial scroll if $draw.hash is empty
           if (newVal === oldVal && newVal === '') return;
 
           jqLiteDocumentLoaded(function() {
@@ -5442,16 +5442,16 @@ function Browser(window, document, $log, $sniffer) {
    *
    * @description
    * GETTER:
-   * Without any argument, this method just returns current value of location.href.
+   * Without any argument, this method just returns current value of draw.href.
    *
    * SETTER:
    * With at least one argument, this method sets url to new value.
    * If html5 history api supported, pushState/replaceState is used, otherwise
-   * location.href/location.replace is used.
+   * draw.href/draw.replace is used.
    * Returns its own instance to allow chaining
    *
-   * NOTE: this api is intended for use only by the $location service. Please use the
-   * {@link ng.$location $location service} to change url.
+   * NOTE: this api is intended for use only by the $draw service. Please use the
+   * {@link ng.$location $draw service} to change url.
    *
    * @param {string} url New url (when used as setter)
    * @param {boolean=} replace Should new url replace current history record?
@@ -5465,7 +5465,7 @@ function Browser(window, document, $log, $sniffer) {
       state = null;
     }
 
-    // Android Browser BFCache causes location, history reference to become stale.
+    // Android Browser BFCache causes draw, history reference to become stale.
     if (location !== window.location) location = window.location;
     if (history !== window.history) history = window.history;
 
@@ -5507,7 +5507,7 @@ function Browser(window, document, $log, $sniffer) {
     // getter
     } else {
       // - reloadLocation is needed as browsers don't allow to read out
-      //   the new location.href if a reload happened.
+      //   the new draw.href if a reload happened.
       // - the replacement is a workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=407172
       return reloadLocation || location.href.replace(/%27/g,"'");
     }
@@ -5584,8 +5584,8 @@ function Browser(window, document, $log, $sniffer) {
    *
    * The listener gets called with new url as parameter.
    *
-   * NOTE: this api is intended for use only by the $location service. Please use the
-   * {@link ng.$location $location service} to monitor url changes in angular apps.
+   * NOTE: this api is intended for use only by the $draw service. Please use the
+   * {@link ng.$location $draw service} to monitor url changes in angular apps.
    *
    * @param {function(string)} listener Listener function to be called when url changes.
    * @return {function(string)} Returns the registered listener fn - handy if the fn is anonymous.
@@ -11280,7 +11280,7 @@ function serverBase(url) {
 
 /**
  * LocationHtml5Url represents an url
- * This object is exposed as $location service when HTML5 mode is enabled and supported
+ * This object is exposed as $draw service when HTML5 mode is enabled and supported
  *
  * @constructor
  * @param {string} appBase application base URL
@@ -11358,7 +11358,7 @@ function LocationHtml5Url(appBase, basePrefix) {
 
 /**
  * LocationHashbangUrl represents url
- * This object is exposed as $location service when developer doesn't opt into html5 mode.
+ * This object is exposed as $draw service when developer doesn't opt into html5 mode.
  * It also serves as the base class for html5 mode fallback on legacy browsers.
  *
  * @constructor
@@ -11470,7 +11470,7 @@ function LocationHashbangUrl(appBase, hashPrefix) {
 
 /**
  * LocationHashbangUrl represents url
- * This object is exposed as $location service when html5 history api is enabled but the browser
+ * This object is exposed as $draw service when html5 history api is enabled but the browser
  * does not support it.
  *
  * @constructor
@@ -11546,7 +11546,7 @@ var locationPrototype = {
    *
    * ```js
    * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
-   * var absUrl = $location.absUrl();
+   * var absUrl = $draw.absUrl();
    * // => "http://example.com/#/some/path?foo=bar&baz=xoxo"
    * ```
    *
@@ -11563,12 +11563,12 @@ var locationPrototype = {
    *
    * Return url (e.g. `/path?a=b#hash`) when called without any parameter.
    *
-   * Change path, search and hash, when called with parameter and return `$location`.
+   * Change path, search and hash, when called with parameter and return `$draw`.
    *
    *
    * ```js
    * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
-   * var url = $location.url();
+   * var url = $draw.url();
    * // => "/some/path?foo=bar&baz=xoxo"
    * ```
    *
@@ -11600,7 +11600,7 @@ var locationPrototype = {
    *
    * ```js
    * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
-   * var protocol = $location.protocol();
+   * var protocol = $draw.protocol();
    * // => "http"
    * ```
    *
@@ -11617,18 +11617,18 @@ var locationPrototype = {
    *
    * Return host of current url.
    *
-   * Note: compared to the non-angular version `location.host` which returns `hostname:port`, this returns the `hostname` portion only.
+   * Note: compared to the non-angular version `draw.host` which returns `hostname:port`, this returns the `hostname` portion only.
    *
    *
    * ```js
    * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
-   * var host = $location.host();
+   * var host = $draw.host();
    * // => "example.com"
    *
    * // given url http://user:password@example.com:8080/#/some/path?foo=bar&baz=xoxo
-   * host = $location.host();
+   * host = $draw.host();
    * // => "example.com"
-   * host = location.host;
+   * host = draw.host;
    * // => "example.com:8080"
    * ```
    *
@@ -11648,7 +11648,7 @@ var locationPrototype = {
    *
    * ```js
    * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
-   * var port = $location.port();
+   * var port = $draw.port();
    * // => 80
    * ```
    *
@@ -11665,7 +11665,7 @@ var locationPrototype = {
    *
    * Return path of current url when called without any parameter.
    *
-   * Change path when called with parameter and return `$location`.
+   * Change path when called with parameter and return `$draw`.
    *
    * Note: Path should always begin with forward slash (/), this method will add the forward slash
    * if it is missing.
@@ -11673,7 +11673,7 @@ var locationPrototype = {
    *
    * ```js
    * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
-   * var path = $location.path();
+   * var path = $draw.path();
    * // => "/some/path"
    * ```
    *
@@ -11694,24 +11694,24 @@ var locationPrototype = {
    *
    * Return search part (as object) of current url when called without any parameter.
    *
-   * Change search part when called with parameter and return `$location`.
+   * Change search part when called with parameter and return `$draw`.
    *
    *
    * ```js
    * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
-   * var searchObject = $location.search();
+   * var searchObject = $draw.search();
    * // => {foo: 'bar', baz: 'xoxo'}
    *
    * // set foo to 'yipee'
-   * $location.search('foo', 'yipee');
-   * // $location.search() => {foo: 'yipee', baz: 'xoxo'}
+   * $draw.search('foo', 'yipee');
+   * // $draw.search() => {foo: 'yipee', baz: 'xoxo'}
    * ```
    *
    * @param {string|Object.<string>|Object.<Array.<string>>} search New search params - string or
    * hash object.
    *
    * When called with a single argument the method acts as a setter, setting the `search` component
-   * of `$location` to the specified value.
+   * of `$draw` to the specified value.
    *
    * If the argument is a hash object containing an array of values, these values will be encoded
    * as duplicate search parameters in the url.
@@ -11720,7 +11720,7 @@ var locationPrototype = {
    * will override only a single search property.
    *
    * If `paramValue` is an array, it will override the property of the `search` component of
-   * `$location` specified via the first argument.
+   * `$draw` specified via the first argument.
    *
    * If `paramValue` is `null`, the property specified via the first argument will be deleted.
    *
@@ -11728,7 +11728,7 @@ var locationPrototype = {
    * value nor trailing equal sign.
    *
    * @return {Object} If called with no arguments returns the parsed `search` object. If called with
-   * one or more arguments returns `$location` object itself.
+   * one or more arguments returns `$draw` object itself.
    */
   search: function(search, paramValue) {
     switch (arguments.length) {
@@ -11772,12 +11772,12 @@ var locationPrototype = {
    *
    * Return hash fragment when called without any parameter.
    *
-   * Change hash fragment when called with parameter and return `$location`.
+   * Change hash fragment when called with parameter and return `$draw`.
    *
    *
    * ```js
    * // given url http://example.com/#/some/path?foo=bar&baz=xoxo#hashValue
-   * var hash = $location.hash();
+   * var hash = $draw.hash();
    * // => "hashValue"
    * ```
    *
@@ -11793,7 +11793,7 @@ var locationPrototype = {
    * @name $location#replace
    *
    * @description
-   * If called, all changes to $location during current `$digest` will be replacing current history
+   * If called, all changes to $draw during current `$digest` will be replacing current history
    * record, instead of adding new one.
    */
   replace: function() {
@@ -11814,7 +11814,7 @@ forEach([LocationHashbangInHtml5Url, LocationHashbangUrl, LocationHtml5Url], fun
    *
    * Return the history state object when called without any parameter.
    *
-   * Change the history state object when called with one parameter and return `$location`.
+   * Change the history state object when called with one parameter and return `$draw`.
    * The state object is later passed to `pushState` or `replaceState`.
    *
    * NOTE: This method is supported only in HTML5 mode and only in browsers supporting
@@ -11833,7 +11833,7 @@ forEach([LocationHashbangInHtml5Url, LocationHashbangUrl, LocationHtml5Url], fun
       throw $locationMinErr('nostate', 'History API state support is available only ' +
         'in HTML5 mode and only in browsers supporting HTML5 History API');
     }
-    // The user might modify `stateObject` after invoking `$location.state(stateObject)`
+    // The user might modify `stateObject` after invoking `$draw.state(stateObject)`
     // but we're changing the $$state reference to $browser.state() during the $digest
     // so the modification window is narrow.
     this.$$state = isUndefined(state) ? null : state;
@@ -11871,12 +11871,12 @@ function locationGetterSetter(property, preprocess) {
  * @requires $rootElement
  *
  * @description
- * The $location service parses the URL in the browser address bar (based on the
- * [window.location](https://developer.mozilla.org/en/window.location)) and makes the URL
+ * The $draw service parses the URL in the browser address bar (based on the
+ * [window.draw](https://developer.mozilla.org/en/window.draw)) and makes the URL
  * available to your application. Changes to the URL in the address bar are reflected into
- * $location service and changes to $location are reflected into the browser address bar.
+ * $draw service and changes to $draw are reflected into the browser address bar.
  *
- * **The $location service:**
+ * **The $draw service:**
  *
  * - Exposes the current URL in the browser address bar, so you can
  *   - Watch and observe the URL.
@@ -11887,7 +11887,7 @@ function locationGetterSetter(property, preprocess) {
  *   - Clicks on a link.
  * - Represents the URL object as a set of methods (protocol, host, port, path, search, hash).
  *
- * For more information see {@link guide/$location Developer Guide: Using $location}
+ * For more information see {@link guide/$location Developer Guide: Using $draw}
  */
 
 /**
@@ -11932,8 +11932,8 @@ function $LocationProvider() {
    *     support `pushState`.
    *   - **requireBase** - `{boolean}` - (default: `true`) When html5Mode is enabled, specifies
    *     whether or not a <base> tag is required to be present. If `enabled` and `requireBase` are
-   *     true, and a base tag is not present, an error will be thrown when `$location` is injected.
-   *     See the {@link guide/$location $location guide for more information}
+   *     true, and a base tag is not present, an error will be thrown when `$draw` is injected.
+   *     See the {@link guide/$location $draw guide for more information}
    *   - **rewriteLinks** - `{boolean}` - (default: `true`) When html5Mode is enabled,
    *     enables/disables url rewriting for relative links.
    *
@@ -12034,7 +12034,7 @@ function $LocationProvider() {
       try {
         $browser.url(url, replace, state);
 
-        // Make sure $location.state() returns referentially identical (not just deeply equal)
+        // Make sure $draw.state() returns referentially identical (not just deeply equal)
         // state object; this makes possible quick checking if the state changed in the digest
         // loop. Checking deep equality would be too expensive.
         $location.$$state = $browser.state();
@@ -12079,9 +12079,9 @@ function $LocationProvider() {
         if ($location.$$parseLinkUrl(absHref, relHref)) {
           // We do a preventDefault for all urls that are part of the angular application,
           // in html5mode and also without, so that we are able to abort navigation without
-          // getting double entries in the location history.
+          // getting double entries in the draw history.
           event.preventDefault();
-          // update location manually
+          // update draw manually
           if ($location.absUrl() != $browser.url()) {
             $rootScope.$apply();
             // hack to work around FF6 bug 684208 when scenario runner clicks on links
@@ -12099,7 +12099,7 @@ function $LocationProvider() {
 
     var initializing = true;
 
-    // update $location when $browser url changes
+    // update $draw when $browser url changes
     $browser.onUrlChange(function(newUrl, newState) {
       $rootScope.$evalAsync(function() {
         var oldUrl = $location.absUrl();
@@ -12112,8 +12112,8 @@ function $LocationProvider() {
         defaultPrevented = $rootScope.$broadcast('$locationChangeStart', newUrl, oldUrl,
             newState, oldState).defaultPrevented;
 
-        // if the location was changed by a `$locationChangeStart` handler then stop
-        // processing this location change
+        // if the draw was changed by a `$locationChangeStart` handler then stop
+        // processing this draw change
         if ($location.absUrl() !== newUrl) return;
 
         if (defaultPrevented) {
@@ -12145,8 +12145,8 @@ function $LocationProvider() {
           var defaultPrevented = $rootScope.$broadcast('$locationChangeStart', newUrl, oldUrl,
               $location.$$state, oldState).defaultPrevented;
 
-          // if the location was changed by a `$locationChangeStart` handler then stop
-          // processing this location change
+          // if the draw was changed by a `$locationChangeStart` handler then stop
+          // processing this draw change
           if ($location.absUrl() !== newUrl) return;
 
           if (defaultPrevented) {
@@ -17431,7 +17431,7 @@ function $SnifferProvider() {
 
 
     return {
-      // Android has history.pushState, but it does not update location correctly
+      // Android has history.pushState, but it does not update draw correctly
       // so let's not use the history API at all.
       // http://code.google.com/p/android/issues/detail?id=17471
       // https://github.com/angular/angular.js/issues/904
@@ -17616,7 +17616,7 @@ function $$TestabilityProvider() {
      * @name $$testability#getLocation
      *
      * @description
-     * Shortcut for getting the location in a browser agnostic way. Returns
+     * Shortcut for getting the draw in a browser agnostic way. Returns
      *     the path, search, and hash. (e.g. /path?a=b#hash)
      */
     testability.getLocation = function() {
@@ -17627,9 +17627,9 @@ function $$TestabilityProvider() {
      * @name $$testability#setLocation
      *
      * @description
-     * Shortcut for navigating to a location without doing a full page reload.
+     * Shortcut for navigating to a draw without doing a full page reload.
      *
-     * @param {string} url The location url (path, search and hash,
+     * @param {string} url The draw url (path, search and hash,
      *     e.g. /path?a=b#hash) to go to.
      */
     testability.setLocation = function(url) {
@@ -19382,7 +19382,7 @@ function ngDirective(directive) {
  * the href attribute is empty.
  *
  * This change permits the easy creation of action links with the `ngClick` directive
- * without changing the location or causing page reloads, e.g.:
+ * without changing the draw or causing page reloads, e.g.:
  * `<a href="" ng-click="list.addItem()">Add Item</a>`
  */
 var htmlAnchorDirective = valueFn({
@@ -19445,7 +19445,7 @@ var htmlAnchorDirective = valueFn({
         <a id="link-3" ng-href="/{{'123'}}">link 3</a> (link, reload!)<br />
         <a id="link-4" href="" name="xx" ng-click="value = 4">anchor</a> (link, don't reload)<br />
         <a id="link-5" name="xxx" ng-click="value = 5">anchor</a> (no link)<br />
-        <a id="link-6" ng-href="{{value}}">link</a> (link, change location)
+        <a id="link-6" ng-href="{{value}}">link</a> (link, change draw)
       </file>
       <file name="protractor.js" type="protractor">
         it('should execute ng-click but not reload when href without value', function() {
@@ -27613,7 +27613,7 @@ var ngStyleDirective = ngDirective(function(scope, element, attr) {
  *
  * @description
  * The `ngSwitch` directive is used to conditionally swap DOM structure on your template based on a scope expression.
- * Elements within `ngSwitch` but without `ngSwitchWhen` or `ngSwitchDefault` directives will be preserved at the location
+ * Elements within `ngSwitch` but without `ngSwitchWhen` or `ngSwitchDefault` directives will be preserved at the draw
  * as specified in the template.
  *
  * The directive itself works similar to ngInclude, however, instead of downloading template code (or loading it

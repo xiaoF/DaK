@@ -4668,7 +4668,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
     self.__content = options.el.firstElementChild;
 
     //Remove any scrollTop attached to these elements; they are virtual scroll now
-    //This also stops on-load-scroll-to-window.location.hash that the browser does
+    //This also stops on-load-scroll-to-window.draw.hash that the browser does
     setTimeout(function() {
       if (self.__container && self.__content) {
         self.__container.scrollTop = 0;

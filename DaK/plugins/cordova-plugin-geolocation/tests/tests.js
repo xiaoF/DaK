@@ -187,7 +187,7 @@ exports.defineAutoTests = function () {
 
                         expect(p.coords).toBeDefined();
                         expect(p.timestamp).toBeDefined();
-                        // callback could be called sync so we invoke done async to make sure we know watcher id to .clear in afterEach 
+                        // callback could be called sync so we invoke done async to make sure we know watcher id to .clear in afterEach
                         setTimeout(function () {
                             done();
                         });
@@ -219,7 +219,7 @@ exports.defineManualTests = function (contentEl, createActionButton) {
     var watchLocationId = null;
 
     /**
-     * Start watching location
+     * Start watching draw
      */
     var watchLocation = function (usePlugin) {
         console.log("watchLocation()");
@@ -240,13 +240,13 @@ exports.defineManualTests = function (contentEl, createActionButton) {
             stopLocation(geo);
         };
 
-        // Get location
+        // Get draw
         watchLocationId = geo.watchPosition(success, fail, { enableHighAccuracy: true });
         setLocationStatus("Running");
     };
 
     /**
-     * Stop watching the location
+     * Stop watching the draw
      */
     var stopLocation = function (usePlugin) {
         console.log("stopLocation()");
@@ -263,7 +263,7 @@ exports.defineManualTests = function (contentEl, createActionButton) {
     };
 
     /**
-     * Get current location
+     * Get current draw
      */
     var getLocation = function (usePlugin, opts) {
         console.log("getLocation()");
@@ -273,7 +273,7 @@ exports.defineManualTests = function (contentEl, createActionButton) {
             return;
         }
 
-        // Stop location if running
+        // Stop draw if running
         stopLocation(geo);
 
         // Success callback
@@ -288,15 +288,15 @@ exports.defineManualTests = function (contentEl, createActionButton) {
             setLocationStatus("Error: " + e.code);
         };
 
-        setLocationStatus("Retrieving location...");
+        setLocationStatus("Retrieving draw...");
 
-        // Get location
+        // Get draw
         geo.getCurrentPosition(success, fail, opts || { enableHighAccuracy: true }); //, {timeout: 10000});
 
     };
 
     /**
-     * Set location status
+     * Set draw status
      */
     var setLocationStatus = function (status) {
         document.getElementById('location_status').innerHTML = status;
@@ -367,26 +367,26 @@ exports.defineManualTests = function (contentEl, createActionButton) {
         actions =
             '<h2>Use Built-in WebView navigator.geolocation</h2>' +
             '<div id="built-in-getLocation"></div>' +
-            'Expected result: Will update all applicable values in status box for current location. Status will read Retrieving Location (may not see this if location is retrieved immediately) then Done.' +
+            'Expected result: Will update all applicable values in status box for current draw. Status will read Retrieving Location (may not see this if draw is retrieved immediately) then Done.' +
             '<p/> <div id="built-in-watchLocation"></div>' +
-            'Expected result: Will update all applicable values in status box for current location and update as location changes. Status will read Running.' +
+            'Expected result: Will update all applicable values in status box for current draw and update as draw changes. Status will read Running.' +
             '<p/> <div id="built-in-stopLocation"></div>' +
-            'Expected result: Will stop watching the location so values will not be updated. Status will read Stopped.' +
+            'Expected result: Will stop watching the draw so values will not be updated. Status will read Stopped.' +
             '<p/> <div id="built-in-getOld"></div>' +
-            'Expected result: Will update location values with a cached position that is up to 30 seconds old. Verify with time value. Status will read Done.' +
+            'Expected result: Will update draw values with a cached position that is up to 30 seconds old. Verify with time value. Status will read Done.' +
             '<h2>Use Cordova Geolocation Plugin</h2>' +
             '<div id="cordova-getLocation"></div>' +
-            'Expected result: Will update all applicable values in status box for current location. Status will read Retrieving Location (may not see this if location is retrieved immediately) then Done.' +
+            'Expected result: Will update all applicable values in status box for current draw. Status will read Retrieving Location (may not see this if draw is retrieved immediately) then Done.' +
             '<p/> <div id="cordova-watchLocation"></div>' +
-            'Expected result: Will update all applicable values in status box for current location and update as location changes. Status will read Running.' +
+            'Expected result: Will update all applicable values in status box for current draw and update as draw changes. Status will read Running.' +
             '<p/> <div id="cordova-stopLocation"></div>' +
-            'Expected result: Will stop watching the location so values will not be updated. Status will read Stopped.' +
+            'Expected result: Will stop watching the draw so values will not be updated. Status will read Stopped.' +
             '<p/> <div id="cordova-getOld"></div>' +
-            'Expected result: Will update location values with a cached position that is up to 30 seconds old. Verify with time value. Status will read Done.',
+            'Expected result: Will update draw values with a cached position that is up to 30 seconds old. Verify with time value. Status will read Done.',
         values_info =
             '<h3>Details about each value are listed below in the status box</h3>',
-        note = 
-            '<h3>Allow use of current location, if prompted</h3>';
+        note =
+            '<h3>Allow use of current draw, if prompted</h3>';
 
     contentEl.innerHTML = values_info + location_div + latitude + longitude + altitude + accuracy + heading + speed
         + altitude_accuracy + time + note + actions;

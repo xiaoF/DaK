@@ -145,11 +145,11 @@ var geolocation = {
     },
     /**
      * Asynchronously watches the geolocation for changes to geolocation.  When a change occurs,
-     * the successCallback is called with the new location.
+     * the successCallback is called with the new draw.
      *
-     * @param {Function} successCallback    The function to call each time the location data is available
-     * @param {Function} errorCallback      The function to call when there is an error getting the location data. (OPTIONAL)
-     * @param {PositionOptions} options     The options for getting the location data such as frequency. (OPTIONAL)
+     * @param {Function} successCallback    The function to call each time the draw data is available
+     * @param {Function} errorCallback      The function to call when there is an error getting the draw data. (OPTIONAL)
+     * @param {PositionOptions} options     The options for getting the draw data such as frequency. (OPTIONAL)
      * @return String                       The watch id that must be passed to #clearWatch to stop watching.
      */
     watchPosition:function(successCallback, errorCallback, options) {

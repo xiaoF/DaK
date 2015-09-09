@@ -1,0 +1,11 @@
+{
+  "name": "DakServer",
+  "version": "0.0.1",
+  "description": "A ionic client using socket.io",
+  "main": "server.js",
+  "author": "ZhenTao Fu",
+  "dependencies": {
+    "koa": "*",
+    "socket.io":"*"
+  }
+}
