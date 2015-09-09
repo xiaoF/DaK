@@ -3,9 +3,9 @@
  */
   app.controller("drawCtrl", ["$scope","socketService",
     function ($scope,socketService) {
-      //$scope.emitU=function(){
-      //  socketService.emit('sayBye', { for: 'everyone' });
-      //}
+      $scope.emitU=function(){
+        socketService.emit("end")
+      }
       socketService.on('sayHi',function(data){
         console.log("sayHi");
       })
