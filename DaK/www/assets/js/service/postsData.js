@@ -20,39 +20,39 @@
 
 app.factory("postsData", ["GLOBAL_CONSTANT", "$q", "$http",
   function (GLOBAL_CONSTANT, $q, $http) {
-    return  {
+    return {
       all: function () {
         var promises = [];
-        var workDone=false;
+        var workDone = false;
         angular.forEach(GLOBAL_CONSTANT.POSTS, function (post) {
 
-          var promise = $http.jsonp(GLOBAL_CONSTANT.GITHUBAPIHOST+ 'repos/' + post.NAME + '/' + post.REPO + '/issues?callback=JSON_CALLBACK', {
+          var promise = $http.jsonp(GLOBAL_CONSTANT.GITHUBAPIHOST + 'repos/' + post.NAME + '/' + post.REPO + '/issues?callback=JSON_CALLBACK', {
             params: {}
           })
           promises.push(promise);
         });
-        return $q.all(promises).then(function(data) {
+        return $q.all(promises).then(function (data) {
           var posts = []
-            if(posts.length ===0 ){
-              for(var i=0;i<data.length;i++){
-                if(data[i].data.meta.status == 200){
-                  posts.push(data[i].data.data[0]);
-                  data[i].data.data.shift();
-                  break;
-                }
+          if (posts.length === 0) {
+            for (var i = 0; i < data.length; i++) {
+              if (data[i].data.meta.status == 200) {
+                posts.push(data[i].data.data[0]);
+                data[i].data.data.shift();
+                break;
               }
+            }
           }
           angular.forEach(data, function (postArray) {
-            if(postArray.data.meta.status == 200){
+            if (postArray.data.meta.status == 200) {
               angular.forEach(postArray.data.data, function (postObj) {
                 for (var i = 0; i < posts.length; i++) {
                   if ((new Date(postObj.created_at).getTime()) >= (new Date(posts[i].created_at).getTime())) {
                     posts.splice(i, 0, postObj);
-                    workDone=true
+                    workDone = true
                     break;
                   }
                 }
-                if(!workDone){
+                if (!workDone) {
                   posts.push(postObj);
                 }
               })
