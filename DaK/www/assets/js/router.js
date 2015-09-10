@@ -26,10 +26,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "assets/tpl/draw/draw.html",
             controller:'drawCtrl'
         })
-        .state('dak', {
-            url: '/dak',
-            templateUrl: "assets/tpl/dak/dak.html",
-            controller:'dakCtrl'
+        .state('chat', {
+            url: '/chat',
+            templateUrl: "assets/tpl/chat/chat.html",
+            controller:'chatCtrl'
         })
         .state('post', {
           params: {content:null,commentData:null},

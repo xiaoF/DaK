@@ -2,21 +2,21 @@
 * Copyright (c) 2015 Emmanuel Pelletier
 * Licensed MIT */
 (function() {
-	
+
 'use strict';
 
 /**
  * SimpleUndo is a very basic javascript undo/redo stack for managing histories of basically anything.
- * 
+ *
  * options are: {
  * 	* `provider` : required. a function to call on `save`, which should provide the current state of the historized object through the given "done" callback
  * 	* `maxLength` : the maximum number of items in history
  * 	* `opUpdate` : a function to call to notify of changes in history. Will be called on `save`, `undo`, `redo` and `clear`
  * }
- * 
+ *
  */
 var SimpleUndo = function(options) {
-	
+
 	var settings = options ? options : {};
 	var defaultOptions = {
 		provider: function() {
@@ -25,11 +25,11 @@ var SimpleUndo = function(options) {
 		maxLength: 30,
 		onUpdate: function() {}
 	};
-	
+
 	this.provider = (typeof settings.provider != 'undefined') ? settings.provider : defaultOptions.provider;
 	this.maxLength = (typeof settings.maxLength != 'undefined') ? settings.maxLength : defaultOptions.maxLength;
 	this.onUpdate = (typeof settings.onUpdate != 'undefined') ? settings.onUpdate : defaultOptions.onUpdate;
-	
+
 	this.initialItem = null;
 	this.clear();
 };
@@ -56,7 +56,7 @@ SimpleUndo.prototype.save = function() {
 	this.provider(function(current) {
 		truncate(this.stack, this.maxLength);
 		this.position = Math.min(this.position,this.stack.length - 1);
-		
+
 		this.stack = this.stack.slice(0, this.position + 1);
 		this.stack.push(current);
 		this.position++;
@@ -68,7 +68,7 @@ SimpleUndo.prototype.undo = function(callback) {
 	if (this.canUndo()) {
 		var item =  this.stack[--this.position];
 		this.onUpdate();
-		
+
 		if (callback) {
 			callback(item);
 		}
@@ -79,7 +79,7 @@ SimpleUndo.prototype.redo = function(callback) {
 	if (this.canRedo()) {
 		var item = this.stack[++this.position];
 		this.onUpdate();
-		
+
 		if (callback) {
 			callback(item);
 		}
@@ -632,7 +632,7 @@ DrawingBoard.Board.prototype = {
 	/**
 	 * WebStorage handling : save and restore to local or session storage
 	 */
-	
+
 	setWebStorage: function(data) {
 		if (window[this.storage]) {
 			window[this.storage].setItem('drawing-board-' + this.id, data);
@@ -831,7 +831,8 @@ DrawingBoard.Board.prototype = {
 	 */
 
 	initDrawEvents: function() {
-		this.isDrawing = false;
+    this.isDrawing = false;
+    this.isActive = false;
 		this.isMouseHovering = false;
 		this.coords = {};
 		this.coords.old = this.coords.current = this.coords.oldMid = { x: 0, y: 0 };
@@ -865,7 +866,7 @@ DrawingBoard.Board.prototype = {
 			this.isDrawing = false;
 		}, this));
 
-		if (window.requestAnimationFrame) requestAnimationFrame( $.proxy(this.draw, this) );
+		//if (window.requestAnimationFrame) requestAnimationFrame( $.proxy(this.draw, this) );
 	},
 
 	draw: function() {
@@ -892,15 +893,16 @@ DrawingBoard.Board.prototype = {
 			this.coords.oldMid = currentMid;
 		}
 
-		if (window.requestAnimationFrame) requestAnimationFrame( $.proxy(function() { this.draw(); }, this) );
+		if (window.requestAnimationFrame && this.isActive) requestAnimationFrame( $.proxy(function() { this.draw(); }, this) );
 	},
 
 	_onInputStart: function(e, coords) {
 		this.coords.current = this.coords.old = coords;
 		this.coords.oldMid = this._getMidInputCoords(coords);
 		this.isDrawing = true;
+    this.isActive = true;
 
-		if (!window.requestAnimationFrame) this.draw();
+		if (window.requestAnimationFrame) this.draw();
 
 		this.ev.trigger('board:startDrawing', {e: e, coords: coords});
 		e.stopPropagation();
@@ -920,7 +922,7 @@ DrawingBoard.Board.prototype = {
 	_onInputStop: function(e, coords) {
 		if (this.isDrawing && (!e.touches || e.touches.length === 0)) {
 			this.isDrawing = false;
-
+      this.isActive = false;
 			this.saveWebStorage();
 			this.saveHistory();
 

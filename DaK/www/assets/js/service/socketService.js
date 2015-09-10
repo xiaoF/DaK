@@ -5,10 +5,3 @@ app.factory('socketService',  ["socketFactory",
   });
 }])
 
-
-app.factory('boardService',  ["boardFactory",
-  function (boardFactory) {
-    return boardFactory({
-      name:'myBoard'
-    });
-  }])
