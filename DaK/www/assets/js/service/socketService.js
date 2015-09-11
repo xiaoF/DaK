@@ -1,7 +1,7 @@
-app.factory('socketService',  ["socketFactory",
-  function (socketFactory) {
+app.factory('socketService',  ["socketFactory","GLOBAL_CONSTANT",
+  function (socketFactory,GLOBAL_CONSTANT) {
   return socketFactory({
-    ioSocket: io.connect('http://127.0.0.1:3000/')
+    ioSocket: io.connect(GLOBAL_CONSTANT.SOCKETIO.HOST)
   });
 }])
 

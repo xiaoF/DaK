@@ -1,8 +1,8 @@
 /**
  * Created by xiaoF on 15/9/2.
  */
-app.controller("chatCtrl", ["$scope",
-    function ($scope) {
+app.controller("chatCtrl", ["$scope","stompService",
+    function ($scope,stompService) {
 
     }]);
 //$scope.client = Stomp.client("ws://localhost:61614?aaa=11&bbb=111");

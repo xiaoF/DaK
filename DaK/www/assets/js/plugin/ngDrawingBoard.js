@@ -20,7 +20,7 @@ angular.module('ngDrawingBoard', []).
         //var prefix = options.prefix === undefined ? defaultPrefix : options.prefix ;
         //var defaultScope = options.scope || $rootScope;
 
-        var defaultBoard = new DrawingBoard.Board(options.name, {
+        var drawingBoard = new DrawingBoard.Board(options.name, {
           controls: [
             'Color', {
               Size: {
@@ -42,10 +42,10 @@ angular.module('ngDrawingBoard', []).
 
         var wrappedBoard = {
           setWebStorage:function(data){
-            defaultBoard.setWebStorage(data);
+            drawingBoard.setWebStorage(data);
           },
           bind: function (eventName, callback) {
-            defaultBoard.ev.bind(eventName, asyncAngularify(defaultBoard, callback));
+            drawingBoard.ev.bind(eventName, asyncAngularify(drawingBoard, callback));
           }
         };
 

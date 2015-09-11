@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('dak', ['ionic', 'btford.markdown','btford.socket-io','ngDrawingBoard'])
+var app = angular.module('dak', ['ionic', 'btford.markdown','btford.socket-io','ngDrawingBoard','ngStomp','ngNotify'])
 
 app.run(function ($ionicPlatform) {
   $ionicPlatform.ready(function () {
@@ -45,5 +45,17 @@ app.constant("GLOBAL_CONSTANT", {
   }, {
     NAME: "xufei",
     REPO: "blog"
-  }]
+  }],
+  DRAWINGBOARD:{
+    TAGID:"myBoard"
+  },
+  SOCKETIO:{
+    HOST:"http://127.0.0.1:3000/"
+  },
+  MQ:{
+    HOST:"ws://127.0.0.1:61614",
+    USERNAME:"admin",
+    PASSWORD:"password",
+    SUBSCRIBE:["/topic/chat","/topic/dak"]
+  }
 })
