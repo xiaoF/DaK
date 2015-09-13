@@ -1,4 +1,5 @@
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.config(["$stateProvider", "$urlRouterProvider","$locationProvider",
+  function ($stateProvider, $urlRouterProvider,$locationProvider) {
     $stateProvider
         //.state('chatDetail', {
         //  //cache: true,
@@ -38,4 +39,5 @@ app.config(function ($stateProvider, $urlRouterProvider) {
           controller:'postCtrl'
         })
     $urlRouterProvider.otherwise('/posts');
-});
+    //$locationProvider.html5Mode(true);
+}]);

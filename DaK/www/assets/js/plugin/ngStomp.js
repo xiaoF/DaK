@@ -3,7 +3,6 @@ angular.module('ngStomp', []).
 
     // expose to provider
     this.$get = ['$timeout','GLOBAL_CONSTANT','ngNotify', function ($timeout,GLOBAL_CONSTANT,ngNotify) {
-
       ngNotify.config({
         theme: 'pure',
         position: 'top',

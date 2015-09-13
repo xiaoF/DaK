@@ -17,6 +17,10 @@ app.run(function ($ionicPlatform) {
     }
   });
 })
+
+app.run(function ($rootScope) {
+  $rootScope.meseeages = [];
+});
 //decorator
 app.constant("GLOBAL_CONSTANT", {
   //https://www.draw.com/api/topics/show.json?node_name=all4all

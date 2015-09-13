@@ -3,7 +3,6 @@
  */
 app.controller("chatCtrl", ["$scope","stompService",
     function ($scope,stompService) {
-
     }]);
 //$scope.client = Stomp.client("ws://localhost:61614?aaa=11&bbb=111");
 ////$scope.client.heartbeat.outgoing = 0;
