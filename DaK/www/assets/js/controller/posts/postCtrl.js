@@ -8,7 +8,6 @@ app.controller("postCtrl", ["$scope","$state","utils",
     utils.getData($state.params.commentData).then(function(data){
       $scope.comments=data.data;
     }).catch(function(error){
-                    console.log(error)
       $state.go("posts")
     })
   }]);

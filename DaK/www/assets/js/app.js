@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('dak', ['ionic', 'btford.markdown','btford.socket-io','ngDrawingBoard','ngStomp','ngNotify'])
+var app = angular.module('dak', ['ionic', 'btford.markdown','btford.socket-io','ngDrawingBoard','ngStomp','ngNotify','ngChat'])
 
 app.run(function ($ionicPlatform) {
   $ionicPlatform.ready(function () {
@@ -18,9 +18,43 @@ app.run(function ($ionicPlatform) {
   });
 })
 
-app.run(function ($rootScope) {
-  $rootScope.meseeages = [];
-});
+app.run(["$rootScope","$ionicViewSwitcher","$state","ngNotify",function ($rootScope,$ionicViewSwitcher,$state,ngNotify) {
+  $rootScope.onClickDashTab = function(){
+    $ionicViewSwitcher.nextTransition("none");
+    $state.go('dash');
+  }
+  $rootScope.onClickPostTab = function(){
+      $ionicViewSwitcher.nextTransition("none");
+      $state.go('posts');
+  }
+  $rootScope.onClickChatTab = function(){
+      $ionicViewSwitcher.nextTransition("none");
+      $state.go('chat');
+  }
+  $rootScope.onClickDrawTab = function(){
+      $ionicViewSwitcher.nextTransition("none");
+      $state.go('draw');
+  }
+
+  $rootScope.safeApply = function(fn) {
+    var phase = $rootScope.$$phase;
+    if (phase == '$apply' || phase == '$digest') {
+      if (fn && (typeof(fn) === 'function')) {
+        fn();
+      }
+    } else {
+      this.$apply(fn);
+    }
+  };
+
+  ngNotify.config({
+    theme: 'pure',
+    position: 'top',
+    duration: 3000,
+    sticky: false,
+    html: false
+  });
+}]);
 //decorator
 app.constant("GLOBAL_CONSTANT", {
   //https://www.draw.com/api/topics/show.json?node_name=all4all
@@ -54,10 +88,12 @@ app.constant("GLOBAL_CONSTANT", {
     TAGID:"myBoard"
   },
   SOCKETIO:{
-    HOST:"http://127.0.0.1:3000/"
+    //HOST:"http://172.23.2.166:3000/"
+    HOST:"http://jxj1.wicp.net/"
   },
   MQ:{
-    HOST:"ws://127.0.0.1:61614",
+    //HOST:"ws://172.23.2.166:61614",
+    HOST:"ws://testnode.wicp.net",
     USERNAME:"admin",
     PASSWORD:"password",
     SUBSCRIBE:["/topic/chat","/topic/dak"]

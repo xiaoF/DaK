@@ -32,12 +32,18 @@ app.config(["$stateProvider", "$urlRouterProvider","$locationProvider",
             templateUrl: "assets/tpl/chat/chat.html",
             controller:'chatCtrl'
         })
+      .state('user', {
+        params: {user:null},
+        url: '/user',
+        templateUrl: "assets/tpl/chat/user.html",
+        controller:'userCtrl'
+      })
         .state('post', {
           params: {content:null,commentData:null},
           url: '/post',
           templateUrl: "assets/tpl/posts/post.html",
           controller:'postCtrl'
         })
-    $urlRouterProvider.otherwise('/posts');
+    $urlRouterProvider.otherwise('/chat');
     //$locationProvider.html5Mode(true);
 }]);
