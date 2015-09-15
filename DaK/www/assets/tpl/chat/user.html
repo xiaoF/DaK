@@ -13,9 +13,9 @@
   </ion-content>
   <ion-footer-bar align-title="left" class="bar-light reply-new" keyboard-attach>
     <label class="item-input-wrapper">
-      <input type="text" class="row" placeholder="回复">
+      <input type="text" class="row" placeholder="回复" ng-model="msg">
     </label>
-    <button class="button button-small button-clear button-positive">
+    <button ng-click="send()" class="button button-small button-clear button-positive">
       提交
     </button>
   </ion-footer-bar>

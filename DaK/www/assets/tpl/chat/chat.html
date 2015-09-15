@@ -4,7 +4,7 @@
   </div>
     <ion-content class="has-footer has-header">
       <ion-list>
-        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in $root.chatCache" type="item-text-wrap" ng-click="goChat(chat.id)">
+        <ion-item class="item-avatar item-icon-right" ng-repeat="chat in $root.chatCache" type="item-text-wrap" ng-click="goChat(chat.id)">
           <img ng-src="{{chat.face}}">
           <h2>{{chat.name}}</h2>
           <p>{{chat.records[chat.records.length-1].body}}</p>

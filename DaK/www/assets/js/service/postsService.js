@@ -1,9 +1,12 @@
-app.factory("postsService", ["GLOBAL_CONSTANT", "$q", "$http",
-  function (GLOBAL_CONSTANT, $q, $http) {
+app.factory("postsService", ["GLOBAL_CONSTANT", "$q", "$http","$ionicLoading",
+  function (GLOBAL_CONSTANT, $q, $http,$ionicLoading) {
     var _posts =[]
     return {
       all: function () {
         if(_posts.length===0){
+          $ionicLoading.show({
+            template: '<ion-spinner icon="lines" class="spinner-positive"></ion-spinner>'
+          });
         var promises = [];
         var workDone = false;
         angular.forEach(GLOBAL_CONSTANT.POSTS, function (post) {
@@ -40,6 +43,7 @@ app.factory("postsService", ["GLOBAL_CONSTANT", "$q", "$http",
               })
             }
           });
+          $ionicLoading.hide();
           _posts = posts
           return posts
         });

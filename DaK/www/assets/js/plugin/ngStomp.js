@@ -20,7 +20,6 @@ angular.module('ngStomp', []).
     angular.forEach(GLOBAL_CONSTANT.MQ.SUBSCRIBE, function (subject) {
 
       client.subscribe(subject, function(message) {
-        console.log(message)
         chatService.set(JSON.parse(utils.bin2String(message.body)))
       });
 
@@ -29,8 +28,8 @@ angular.module('ngStomp', []).
 });
 
         var wrappedStomp = {
-          send: function (data) {
-            client.send(GLOBAL_CONSTANT.MQ.SUBSCRIBE[0],{}, utils.string2Bin('{"id":2,"msg":{"body":"什么时候回家?"}}'));
+          send: function (id,msg) {
+            client.send(GLOBAL_CONSTANT.MQ.SUBSCRIBE[0],{}, utils.string2Bin('{"id":'+id+',"msg":{"body":"'+msg+'"}}'));
           }
         };
 
