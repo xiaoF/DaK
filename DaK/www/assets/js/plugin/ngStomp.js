@@ -2,7 +2,7 @@ angular.module('ngStomp', []).
   provider('stompFactory', function () {
 
     // expose to provider
-    this.$get = ['$timeout','GLOBAL_CONSTANT','chatService', function ($timeout,GLOBAL_CONSTANT,chatService) {
+    this.$get = ['$timeout','GLOBAL_CONSTANT','chatService','utils', function ($timeout,GLOBAL_CONSTANT,chatService,utils) {
 
       var asyncAngularify = function (stomp, callback) {
         return callback ? function () {
@@ -20,7 +20,8 @@ angular.module('ngStomp', []).
     angular.forEach(GLOBAL_CONSTANT.MQ.SUBSCRIBE, function (subject) {
 
       client.subscribe(subject, function(message) {
-        chatService.set(JSON.parse(message.body))
+        console.log(message)
+        chatService.set(JSON.parse(utils.bin2String(message.body)))
       });
 
     });
@@ -28,8 +29,8 @@ angular.module('ngStomp', []).
 });
 
         var wrappedStomp = {
-          log: function () {
-          console.log("log")
+          send: function (data) {
+            client.send(GLOBAL_CONSTANT.MQ.SUBSCRIBE[0],{}, utils.string2Bin('{"id":2,"msg":{"body":"什么时候回家?"}}'));
           }
         };
 

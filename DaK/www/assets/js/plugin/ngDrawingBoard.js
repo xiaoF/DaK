@@ -20,7 +20,7 @@ angular.module('ngDrawingBoard', []).
         //var prefix = options.prefix === undefined ? defaultPrefix : options.prefix ;
         //var defaultScope = options.scope || $rootScope;
 
-        var drawingBoard = new DrawingBoard.Board(options.name, {
+        var drawingBoard = new DrawingBoard.Board(options.element, {
           controls: [
             'Color', {
               Size: {

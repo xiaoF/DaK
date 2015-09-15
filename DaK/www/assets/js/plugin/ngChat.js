@@ -29,7 +29,57 @@ angular.module('ngChat', []).
         return userService.get(userID)
       },
       self._getChatCache = function (data) {
-
+      $rootScope.chatCache = {
+        "0": {
+          "id": 0,
+          "name": "Ben Sparrow",
+          "face": "https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png",
+          "records": [{
+            "body": "吃了没?"
+          }, {
+            "body": "吃了没?"
+          }],
+          "badge": 1
+        },
+        "1": {
+          "id": 1,
+          "name": "Max Lynx",
+          "face": "https://avatars3.githubusercontent.com/u/11214?v=3&s=460",
+          "records": [{
+            "body": "在不在?"
+          }],
+          "badge": 0
+        },
+        "2": {
+          "id": 2,
+          "name": "Adam Bradleyson",
+          "face": "https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg",
+          "records": [{
+            "body": "什么时候回家?"
+          }, {
+            "body": "什么时候回家?"
+          }],
+          "badge": 0
+        },
+        "3": {
+          "id": 3,
+          "name": "Perry Governor",
+          "face": "https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png",
+          "records": [{
+            "body": "Stomp/Websocket/ActiveMQ"
+          }],
+          "badge": 0
+        },
+        "4": {
+          "id": 4,
+          "name": "Mike Harrington",
+          "face": "https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png",
+          "records": [{
+            "body": "我是小付!!"
+          }],
+          "badge": 0
+        }
+      }
       },
       self._pushMsg = function (data) {
         $rootScope.safeApply(function() {
@@ -45,8 +95,8 @@ angular.module('ngChat', []).
       }
 
       $rootScope.chatCache = {};
-      $rootScope.chatBadge = 0;
-
+      $rootScope.chatBadge = 1;
+        self._getChatCache()
 
       return function chatFactory() {
 

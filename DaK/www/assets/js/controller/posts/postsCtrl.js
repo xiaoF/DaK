@@ -1,18 +1,16 @@
 /**
  * Created by xiaoF on 15/9/2.
  */
-app.controller("postsCtrl", ["$scope", "postsData","$state",
-  function ($scope, postsData,$state) {
+app.controller("postsCtrl", ["$scope", "postsService","$state",
+  function ($scope, postsService,$state) {
     $scope.allData=[];
     $scope.posts=[];
     $scope.postIndex=0;
-    postsData.all()
+    postsService.all()
       .then(function (data) {
         $scope.allData = data
         $scope.posts=$scope.allData.slice(0,20);
         $scope.postIndex=20;
-      }).then(function(){
-        console.log($scope.posts)
       })
 
     $scope.loadMore=function(){
@@ -25,4 +23,10 @@ app.controller("postsCtrl", ["$scope", "postsData","$state",
     $scope.loadPost=function(body,url){
       $state.go('post',{content:body,commentData:url});
     }
+
+    $scope.$on('$destroy', function (data) {
+      console.log("$destroy postsCtrl")
+      // say goodbye to your controller here
+      // release resources, cancel request...
+    })
   }]);

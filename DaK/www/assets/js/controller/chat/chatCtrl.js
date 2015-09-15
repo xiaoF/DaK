@@ -7,4 +7,9 @@ app.controller("chatCtrl", ["$scope","stompService","$state","chatService",
         chatService.clearBadge(user)
         $state.go('user',{user:user});
       }
+      $scope.$on('$destroy', function (data) {
+        console.log("$destroy chat")
+        // say goodbye to your controller here
+        // release resources, cancel request...
+      })
     }]);

@@ -96,6 +96,6 @@ app.constant("GLOBAL_CONSTANT", {
     HOST:"ws://testnode.wicp.net",
     USERNAME:"admin",
     PASSWORD:"password",
-    SUBSCRIBE:["/topic/chat","/topic/dak"]
+    SUBSCRIBE:["/topic/chat"]
   }
 })

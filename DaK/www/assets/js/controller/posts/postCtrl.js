@@ -10,4 +10,10 @@ app.controller("postCtrl", ["$scope","$state","utils",
     }).catch(function(error){
       $state.go("posts")
     })
+
+    $scope.$on('$destroy', function (data) {
+      console.log("$destroy post item")
+      // say goodbye to your controller here
+      // release resources, cancel request...
+    })
   }]);
