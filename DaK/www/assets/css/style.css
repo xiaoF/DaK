@@ -4,3 +4,106 @@
 .reply-new input{
   background: rgba(0, 0, 0, 0);
 }
+
+.pattern-holder{
+  margin: 30px auto;
+}
+.messages {
+  margin:0;
+  padding:0;
+  list-style-type:none;
+}
+
+.messages .message {
+  display:block;
+  clear:both;
+  max-width:50%;
+  margin:0 0 1rem 0;
+  padding:5px;
+  border: 0 !important;
+}
+
+.messages .message:nth-child(even) {
+  float:right;
+}
+
+.messages .message:nth-child(even) img {
+  float:right;
+}
+
+.messages .message p {
+  border-radius:.75rem;
+  background:#e6e5eb;
+  color:#383641;
+  padding:.6875rem;
+  margin:0;
+  font-size:.875rem;
+}
+
+.messages .message:nth-child(even) p {
+  background:#158ffe;
+  color:#fff;
+}
+
+.messages .message img {
+  display:block;
+  max-width:65%;
+  border-radius:.75rem;
+}
+
+
+#loading-cover{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0
+}
+
+#loading-cover {
+  z-index: 10;
+  background: #f1f1f1;
+  color: #666;
+  padding: 1em 1em 5em;
+  -webkit-transition: all 1.5s;
+  -moz-transition: all 1.5s;
+  transition: all 1.5s
+}
+
+#loading-cover.done {
+  opacity: 0;
+  z-index: -1;
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2)
+}
+.vertical-center {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  box-direction: normal;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  box-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center
+}

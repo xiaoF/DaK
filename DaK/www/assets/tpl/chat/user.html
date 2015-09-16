@@ -4,10 +4,10 @@
       <i class="ion-arrow-left-c"></i> 返回
     </ion-nav-back-button>
   </ion-nav-bar>
-  <ion-content class="has-header">
-    <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="detail in $root.chatCache[user].records">
-        <h2>{{detail.body}}</h2>
+  <ion-content class="has-header" delegate-handle="userScroll">
+    <ion-list class="messages">
+      <ion-item class="message" ng-repeat="detail in $root.chatCache[user].records">
+        <p>{{detail.body}}</p>
       </ion-item>
     </ion-list>
   </ion-content>

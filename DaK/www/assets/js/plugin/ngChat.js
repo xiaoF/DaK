@@ -2,8 +2,8 @@ angular.module('ngChat', []).
   provider('chatFactory', function () {
 
     // expose to provider
-    this.$get = ['$timeout', 'GLOBAL_CONSTANT', 'ngNotify', '$rootScope','userService','$state','ngNotify','$q',
-      function ($timeout, GLOBAL_CONSTANT, ngNotify, $rootScope,userService,$state,ngNotify,$q) {
+    this.$get = ['$timeout', 'GLOBAL_CONSTANT', 'ngNotify', '$rootScope','userService','$state','ngNotify','$q','$ionicScrollDelegate',
+      function ($timeout, GLOBAL_CONSTANT, ngNotify, $rootScope,userService,$state,ngNotify,$q,$ionicScrollDelegate) {
 
       var self = this;
       self._initUser = function (data) {
@@ -23,6 +23,8 @@ angular.module('ngChat', []).
             ++$rootScope.chatBadge;
           })
           ngNotify.set($rootScope.chatCache[data.id]["name"]+":"+data.msg.body, 'info');
+        }else{
+          $ionicScrollDelegate.$getByHandle('userScroll').scrollBottom()
         }
       },
       self._getUserInfo = function (userID) {
@@ -37,7 +39,7 @@ angular.module('ngChat', []).
           "records": [{
             "body": "吃了没?"
           }, {
-            "body": "吃了没?"
+            "body": "还没呢!"
           }],
           "badge": 1
         },

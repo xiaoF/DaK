@@ -233,11 +233,11 @@
         }
     };
 
-    function PatternLock(selector, option) {
+    function PatternLock(element, option) {
         var self = this,
             token = self.token = Math.random(),
             iObj = objectHolder[token] = new InternalMethods(),
-            holder = iObj.holder = $(selector);
+            holder = iObj.holder = element;
 
         //if holder is not present return
         if (holder.length == 0) return;
@@ -260,7 +260,7 @@
         //handeling callback
         iObj.option.onDraw = option.onDraw || nullFunc;
 
-        //adding a mapper function  
+        //adding a mapper function
         var mapper = option.mapper;
         if (typeof mapper == "object") {
             iObj.mapperFunc = function(idx) {

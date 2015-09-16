@@ -4,8 +4,7 @@
 	Copyright (c) 2013 Sudhanshu Yadav - ignitersworld.com , released under the MIT license.
 	Demo and documentaion on: ignitersworld.com/lab/patternLock.html
 */
-
-.patt-holder{background:#3382c0;  -ms-touch-action: none;}
+.patt-holder{background:#343F42;  -ms-touch-action: none;}
 .patt-wrap{position:relative; cursor:pointer;}
 .patt-wrap ul, .patt-wrap li{
 	list-style: none;
@@ -20,7 +19,7 @@
  }
 .patt-circ.hovered{
 	border:3px solid #009900;
-} 
+}
 
 .patt-error .patt-circ.hovered{
 	border:3px solid #BA1B26;
@@ -50,4 +49,51 @@
 
 .patt-hidden .patt-lines{
 	display:none;
+}
+
+
+
+
+
+
+
+.patt-wrap {
+  margin: auto;
+  overflow: hidden
+}
+.patt-wrap li {
+  -webkit-transition: all .4s ease-in-out 0s;
+  transition: all .4s ease-in-out 0s
+}
+.patt-dots,
+.patt-lines {
+  -webkit-transition: background .1s ease-in-out 0s;
+  transition: background .1s ease-in-out 0s
+}
+.patt-circ {
+  border: 3px solid transparent
+}
+.patt-dots {
+  background: rgba(255, 255, 255, .8)
+}
+.patt-lines {
+  background: rgba(255, 255, 255, .4)
+}
+.patt-circ.hovered {
+  border-color: #ddd;
+  background: rgba(255, 255, 255, .2)
+}
+.patt-error .patt-circ.hovered {
+  background: rgba(243, 66, 53, .4);
+  border-color: rgba(243, 66, 53, .8)
+}
+.patt-error .patt-lines {
+  background: rgba(243, 66, 53, .5)
+}
+.patt-success .patt-circ.hovered {
+  background: rgba(75, 174, 79, .4);
+  border-color: rgba(75, 174, 79, .8)
+}
+.patt-success .patt-lines {
+  background: rgba(75, 174, 79, .5)
 }

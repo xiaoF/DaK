@@ -11,6 +11,11 @@ app.config(["$stateProvider", "$urlRouterProvider","$locationProvider",
         //  onExit:function(){
         //  }
         //})
+        .state('locker', {
+          url: '/',
+          templateUrl: "assets/tpl/locker/locker.html",
+          controller:'lockerCtrl'
+        })
         .state('dash', {
             url: '/dash',
             templateUrl: "assets/tpl/dash/dash.html",
@@ -44,6 +49,6 @@ app.config(["$stateProvider", "$urlRouterProvider","$locationProvider",
           templateUrl: "assets/tpl/posts/post.html",
           controller:'postCtrl'
         })
-    $urlRouterProvider.otherwise('/chat');
+    $urlRouterProvider.otherwise('/');
     //$locationProvider.html5Mode(true);
 }]);
