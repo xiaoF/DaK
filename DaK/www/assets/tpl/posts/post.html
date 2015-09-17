@@ -4,12 +4,12 @@
       <i class="ion-arrow-left-c"></i> 返回
     </ion-nav-back-button>
   </ion-nav-bar>
-    <ion-content class="has-header">
+    <ion-content class="has-header row">
       <div btf-markdown="mdContent">
       </div>
       <br><br><br><br>
       <ion-list>
-        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="comment in comments">
+        <ion-item class="item-remove-animate item-avatar item-icon-right row" ng-repeat="comment in comments">
           <img ng-src="{{comment.user.avatar_url}}">
           <h2>
             <div btf-markdown="comment.body">

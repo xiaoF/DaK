@@ -2976,6 +2976,48 @@
   content: "\f30c";
 }
 
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0)
+  }
+  to {
+    -webkit-transform: rotate(360deg)
+  }
+}
+
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0)
+  }
+  to {
+    -moz-transform: rotate(360deg)
+  }
+}
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -ms-transform: rotate(0);
+    -o-transform: rotate(0);
+    transform: rotate(0)
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg)
+  }
+}
+
+i.spin {
+  -webkit-animation: spin .9s linear infinite;
+  -moz-animation: spin .9s linear infinite;
+  animation: spin .9s linear infinite
+}
+
+
 /**
  * Resets
  * --------------------------------------------------
