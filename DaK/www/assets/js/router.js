@@ -14,7 +14,13 @@ app.config(["$stateProvider", "$urlRouterProvider","$locationProvider",
         .state('locker', {
           url: '/',
           templateUrl: "assets/tpl/locker/locker.html",
-          controller:'lockerCtrl'
+          controller:'lockerCtrl',
+          onEnter:function(){
+            //angular.element(document.querySelector('p'))
+          },
+          onExit:function(){
+            angular.element(document.getElementById('loading-cover')).hide()
+          }
         })
         .state('dash', {
             url: '/dash',

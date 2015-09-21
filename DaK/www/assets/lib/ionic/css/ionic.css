@@ -4162,9 +4162,9 @@ a.subdued:last-child {
 }
 
 .bar.bar-dark {
-  border-color: #111;
-  background-color: #444444;
-  background-image: linear-gradient(0deg, #111, #111 50%, transparent 50%);
+  border-color: #3B414D;
+  background-color: #3B414D;
+  background-image: linear-gradient(0deg, #3B414D, #3B414D 50%, transparent 50%);
   color: #fff;
 }
 
@@ -4173,7 +4173,7 @@ a.subdued:last-child {
 }
 
 .bar.bar-dark.bar-footer {
-  background-image: linear-gradient(180deg, #111, #111 50%, transparent 50%);
+  background-image: linear-gradient(180deg, #3B414D, #3B414D 50%, transparent 50%);
 }
 
 .bar .title {

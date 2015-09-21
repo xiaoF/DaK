@@ -1,5 +1,5 @@
-app.factory("postsService", ["GLOBAL_CONSTANT", "$q", "$http","$ionicLoading",
-  function (GLOBAL_CONSTANT, $q, $http,$ionicLoading) {
+app.factory("postsService", ["GLOBAL_CONSTANT", "$q", "$http","$ionicLoading","ngNotify",
+  function (GLOBAL_CONSTANT, $q, $http,$ionicLoading,ngNotify) {
     var _posts =[]
     return {
       all: function () {
@@ -46,6 +46,9 @@ app.factory("postsService", ["GLOBAL_CONSTANT", "$q", "$http","$ionicLoading",
           $ionicLoading.hide();
           _posts = posts
           return posts
+        }).catch(function(error){
+          ngNotify.set("GitHub API 好像请求不到数据哟..","error")
+          $ionicLoading.hide();
         });
         }else{ return $q.when(_posts)}
       }
